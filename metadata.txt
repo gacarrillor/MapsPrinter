@@ -22,32 +22,30 @@ email=delazj@gmail.com
 # Optional items:
 
 # Uncomment the following line and add your changelog:
-changelog= v.0.4 (2018-03-10)
-    - convert to QGIS 3
-	- Add export to SVG capability
-	- Print report not supported (yet)
+changelog= v.0.4 (2018-06-26)
+        - Convert to QGIS 3
+	- Add print layout SVG export
     v.0.3 (2015-08-30)
 	- Generate world file + UI minor fixes
-	v.0.2 (2015-07-30)
+    v.0.2 (2015-07-30)
 	- Support of atlas enabled print composer
-    - Multiple selection possible
+        - Multiple selection possible
 	- Add contextual options (show/hide, check/uncheck)
 	- Add progress bar to follow or abort operations
-	v.0.1 (2014-07-30)
+    v.0.1 (2014-07-30)
 	- Initial release
-changelog[fr]= v.0.4 (2018-03-10)
-    - conversion pour QGIS 3
-	- Possibilité d'exporter en svg
-	- Reporting pas encore traité
+changelog[fr]= v.0.4 (2018-06-26)
+        - Adaptation à QGIS 3
+	- Possibilité d'exporter les mises en page en SVG
     v.0.3 (2015-08-30)
 	- Generation de world file + corrections mineures de l'interface
-	v.0.2 (2015-07-30)
+    v.0.2 (2015-07-30)
 	- Export des composeurs avec atlas
 	- Ajout de menus contextuels (afficher/cacher, cocher/décocher)
-    - Sélection multiple possible
+        - Sélection multiple possible
 	- Barre de progression
-	v.0.1 (2014-07-30)
-	- première version
+    v.0.1 (2014-07-30)
+	- Première version
 # Tags are comma separated with spaces allowed
 tags = print, export, map, composer, layout
 tags[fr] = imprimer, exporter, carte, composeur, mises en page
