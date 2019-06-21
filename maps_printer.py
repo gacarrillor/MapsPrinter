@@ -29,8 +29,10 @@ import sys
 import errno
 import tempfile
 
-from qgis.PyQt.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, QFileInfo, QDir, QUrl, QTimer, Qt, QObject
-from qgis.PyQt.QtWidgets import QAction, QListWidgetItem, QFileDialog, QDialogButtonBox, QMenu, QMessageBox, QApplication
+from qgis.PyQt.QtCore import QSettings, QTranslator, qVersion,
+    QCoreApplication, QFileInfo, QDir, QUrl, QTimer, Qt, QObject
+from qgis.PyQt.QtWidgets import QAction, QListWidgetItem, QFileDialog,
+    QDialogButtonBox, QMenu, QMessageBox, QApplication
 from qgis.PyQt.QtGui import QIcon, QCursor, QDesktopServices, QImageWriter
 
 from qgis.core import *
@@ -654,24 +656,30 @@ class MapsPrinter(object):
         """Because GUI settings are not exposed in Python, we need to find and catch user selection
            See discussion at http://osgeo-org.1560.x6.nabble.com/Programmatically-export-layout-with-georeferenced-file-td5365462.html"""
 
+        # There might be more to extract from
+        # https://github.com/qgis/QGIS/blob/release-3_4/src/app/layout/qgslayoutdesignerdialog.cpp#L3901
         if extension == '.pdf':
             exportSettings = QgsLayoutExporter.PdfExportSettings()
-            if layout.customProperty('dpi') and layout.customProperty('dpi') != -1 : exportSettings.dpi = layout.customProperty('dpi')
-            if layout.customProperty('forceVector') == True : exportSettings.forceVectorOutput = True
-            if layout.customProperty('rasterize') == True : exportSettings.rasterizeWholeImage = True
+            if layout.customProperty('forceVector') == True: exportSettings.forceVectorOutput = True
+            if layout.customProperty('rasterize') == True: exportSettings.rasterizeWholeImage = True
         elif extension == '.svg':
             exportSettings = QgsLayoutExporter.SvgExportSettings()
-            if layout.customProperty('dpi') and layout.customProperty('dpi') != -1 : exportSettings.dpi = layout.customProperty('dpi')
-            if layout.customProperty('forceVector') == True : exportSettings.forceVectorOutput = True
-            if layout.customProperty('svgIncludeMetadata') == True : exportSettings.exportMetadata = True
-            if layout.customProperty('svgGroupLayers') == True : exportSettings.exportAsLayers = True
+            if layout.customProperty('forceVector') == True: exportSettings.forceVectorOutput = True
+            if layout.customProperty('svgIncludeMetadata') == True: exportSettings.exportMetadata = True
+            if layout.customProperty('svgGroupLayers') == True: exportSettings.exportAsLayers = True
+            if layout.customProperty('svgDisableRasterTiles') == True: exportSettings.disableRasterTiles = True
         else:
             exportSettings = QgsLayoutExporter.ImageExportSettings()
-            if layout.customProperty('exportWorldFile') == True : exportSettings.generateWorldFile = True
-            if layout.customProperty('') == True : exportSettings.exportMetadata = True
-            if layout.customProperty('dpi') and layout.customProperty('dpi') != -1 : exportSettings.dpi = layout.customProperty('dpi')
-            # if layout.customProperty('atlasRasterFormat') == True : exportSettings.xxxx = True
-            # if layout.customProperty('imageAntialias') == True : exportSettings.xxxx = True
+            if layout.customProperty('exportWorldFile') == True: exportSettings.generateWorldFile = True
+            if layout.customProperty('') == True: exportSettings.exportMetadata = True
+            # if layout.customProperty('atlasRasterFormat') == True: exportSettings.xxxx = True
+            # if layout.customProperty('imageAntialias') == True: exportSettings.antialias = True
+            
+
+        # adding common custom properties such as dpi
+        if (layout.customProperty('dpi')
+                and layout.customProperty('dpi') != -1):
+            exportSettings.dpi = layout.customProperty('dpi')
 
         return exportSettings
 
