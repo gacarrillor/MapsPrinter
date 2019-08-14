@@ -656,20 +656,25 @@ class MapsPrinter(object):
 
         if extension == '.pdf':
             exportSettings = QgsLayoutExporter.PdfExportSettings()
-            if layout.customProperty('dpi') and layout.customProperty('dpi') != -1 : exportSettings.dpi = layout.customProperty('dpi')
-            if layout.customProperty('forceVector') == True : exportSettings.forceVectorOutput = True
-            if layout.customProperty('rasterize') == True : exportSettings.rasterizeWholeImage = True
+            exportSettings.flags = layout.renderContext().flags()
+            exportSettings.dpi = layout.renderContext().dpi()
+            if layout.customProperty('forceVector') is True : exportSettings.forceVectorOutput = True
+            if layout.customProperty('rasterize') is True : exportSettings.rasterizeWholeImage = True
+        
         elif extension == '.svg':
             exportSettings = QgsLayoutExporter.SvgExportSettings()
-            if layout.customProperty('dpi') and layout.customProperty('dpi') != -1 : exportSettings.dpi = layout.customProperty('dpi')
-            if layout.customProperty('forceVector') == True : exportSettings.forceVectorOutput = True
-            if layout.customProperty('svgIncludeMetadata') == True : exportSettings.exportMetadata = True
-            if layout.customProperty('svgGroupLayers') == True : exportSettings.exportAsLayers = True
+            exportSettings.flags = layout.renderContext().flags()
+            exportSettings.dpi = layout.renderContext().dpi()
+            if layout.customProperty('forceVector') is True : exportSettings.forceVectorOutput = True
+            if layout.customProperty('svgIncludeMetadata') is True : exportSettings.exportMetadata = True
+            if layout.customProperty('svgGroupLayers') is True : exportSettings.exportAsLayers = True
+        
         else:
             exportSettings = QgsLayoutExporter.ImageExportSettings()
-            if layout.customProperty('exportWorldFile') == True : exportSettings.generateWorldFile = True
-            if layout.customProperty('') == True : exportSettings.exportMetadata = True
-            if layout.customProperty('dpi') and layout.customProperty('dpi') != -1 : exportSettings.dpi = layout.customProperty('dpi')
+            exportSettings.flags = layout.renderContext().flags()
+            exportSettings.dpi = layout.renderContext().dpi()
+            if layout.customProperty('exportWorldFile') is True : exportSettings.generateWorldFile = True
+            if layout.customProperty('') is True : exportSettings.exportMetadata = True
             # if layout.customProperty('atlasRasterFormat') == True : exportSettings.xxxx = True
             # if layout.customProperty('imageAntialias') == True : exportSettings.xxxx = True
 
